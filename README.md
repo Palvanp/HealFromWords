@@ -9,10 +9,10 @@ Healing From Words is an AI-powered mental health chatbot designed to provide pe
 3. Real-Time Support: Provides immediate, confidential assistance to users anytime.
 4. Optimized Performance: Powered by Intel® technologies for faster execution and scalability.
 
-#Technologies Used
+# Technologies Used
 1. Models: TFBertModel for emotion detection and CTransformers for chatbot responses.
 2. Programming: Python for backend development, Streamlit for frontend.
 3. Optimizations: Intel oneAPI, MKL, and OpenVINO™ for accelerated AI model performance.
 
-#Impact
+# Impact
 Healing From Words addresses challenges in mental health accessibility, offering a scalable, non-judgmental platform for emotional well-being. It supports underserved communities, reduces healthcare costs, and minimizes the ecological footprint of traditional mental health services.
