@@ -94,7 +94,14 @@ def predict_emotion(emotion_model, text):
     # Assuming the model predicts a probability distribution for each emotion
     EMOTION_LABELS = ['anger', 'fear', 'joy', 'love', 'sadness', 'surprise']
     emotion_idx = np.argmax(predictions, axis=-1)  # Get the index of the highest probability
-    return EMOTION_LABELS[emotion_idx[0]], predictions[0]
+    
+    # Map the predicted index to the emotion label
+    emotion = EMOTION_LABELS[emotion_idx[0]]
+    
+    # Create a dictionary for displaying the probabilities
+    emotion_probabilities = {EMOTION_LABELS[i]: float(predictions[0][i]) for i in range(len(EMOTION_LABELS))}
+    
+    return emotion, emotion_probabilities
 
 # Define chatbot functionality
 @st.cache_data(ttl=3600)
@@ -136,6 +143,8 @@ def display_chat_history(emotion_model):
                 # Emotion detection
                 emotion, probabilities = predict_emotion(emotion_model, user_input)
                 st.write(f"Emotion Detected: {emotion}")
+                
+                # Display the probabilities as a bar chart with actual labels
                 st.bar_chart(probabilities)
 
     if st.session_state['generated']:
@@ -143,7 +152,6 @@ def display_chat_history(emotion_model):
             for i in range(len(st.session_state['generated'])):
                 message(st.session_state["past"][i], is_user=True, key=str(i) + '_user', avatar_style="thumbs")
                 message(st.session_state["generated"][i], key=str(i), avatar_style="fun-emoji")
-
 # Load models
 emotion_model = load_emotion_model()
 
